@@ -163,7 +163,7 @@ def printGaloisTapLine(x1, y1, length, arrow=False):
     feedback_y = y1 + length + xorSize  # Use the provided length parameter directly
     print(
         "\t\\draw [line width={0}cm]({1},{2}) -- ({1},{3});".format(
-            lineWidth, x1, y1, feedback_y
+            lineWidth, x1 + boxSize / 2, y1, feedback_y
         )
     )
 
@@ -173,7 +173,14 @@ def printGaloisTapLine(x1, y1, length, arrow=False):
     # Add half circle connecting to the square, flipped on x-axis
     print(
         "\t\\draw [line width={0}cm] ({1},{2}) arc(180:0:{3});".format(
-            lineWidth, x1 - radius, y1, radius
+            lineWidth, x1 + boxSize / 2 - radius, y1, radius
+        )
+    )
+
+    # Draw the line at the bottom of the half circle
+    print(
+        "\t\\draw [line width={0}cm] ({1},{2}) -- ({3},{2});".format(
+            lineWidth, x1 + boxSize / 2 - radius, y1, x1 + boxSize / 2 + radius
         )
     )
 
@@ -182,7 +189,7 @@ def printGaloisTapLine(x1, y1, length, arrow=False):
     arrow_end_y = y1 + radius  # End position at exact top of half circle
     print(
         "\t\\draw [arrows={{-Triangle[angle=90:{0}cm,black,fill=black,line width={1}cm]}}]({2},{3}) -- ({2},{4});".format(
-            arrowHead, lineWidth, x1, arrow_start_y, arrow_end_y
+            arrowHead, lineWidth, x1 + boxSize / 2, arrow_start_y, arrow_end_y
         )
     )
 
@@ -190,7 +197,7 @@ def printGaloisTapLine(x1, y1, length, arrow=False):
 def printGaloisFeedbackPath(x1, x2, x3, y1, y2, feedback, boxsizehalf):
     if drawInitValues:
         print(
-            "\\draw[->,line width=0.1cm,arrows={{-Triangle[angle=90:{6}cm,black,fill=black,line width={5}cm]}}] ({0},{3}) -- ({1},{3}) -- ({1},{4}) -- node[above,yshift={9}cm] {{ $\\scaleto{{ {8} }}{{ {7} }}$ }}  ({2},{4});".format(
+            "\\draw[->,line width=0.1cm,arrows={{-Triangle[angle=90:{6}cm,black,fill=black,line width={5}cm]}}] ({0},{3}) -- ({1},{3}) -- ({1},{4}) -- ({2},{4});".format(
                 x1,
                 x2,
                 x3,
@@ -198,8 +205,6 @@ def printGaloisFeedbackPath(x1, x2, x3, y1, y2, feedback, boxsizehalf):
                 y2,
                 lineWidth,
                 arrowHead,
-                BoxValuesFontSize,
-                feedback,
                 boxsizehalf,
             )
         )
@@ -213,8 +218,6 @@ def printGaloisFeedbackPath(x1, x2, x3, y1, y2, feedback, boxsizehalf):
                 y2,
                 lineWidth,
                 arrowHead,
-                BoxValuesFontSize,
-                feedback,
                 boxsizehalf,
             )
         )
@@ -223,14 +226,14 @@ def printGaloisFeedbackPath(x1, x2, x3, y1, y2, feedback, boxsizehalf):
 def printGaloisOutput(x1, x2, y1, value, boxsizehalf):
     if drawInitValues:
         print(
-            "\\draw[->,line width=0.1cm,arrows={{-Triangle[angle=90:{4}cm,black,fill=black,line width={3}cm]}}] ({0},{2}) -- ({1},{2}) node[midway,above,yshift={7}cm]{{  $\\scaleto{{  {6}  }}{{ {5} }}$  }};".format(
+            "\\draw[->,line width=0.1cm,arrows={{-Triangle[angle=90:{4}cm,black,fill=black,line width={3}cm]}}] ({0},{2}) -- ({1},{2}) node[right]{{  $\\scaleto{{  {6}  }}{{ {5} }}$  }};".format(
                 x1, x2, y1, lineWidth, arrowHead, BoxValuesFontSize, value, boxsizehalf
             )
         )
     else:
         print(
             "\\draw[->,line width=0.1cm,arrows={{-Triangle[angle=90:{4}cm,black,fill=black,line width={3}cm]}}] ({0},{2}) -- ({1},{2}) node[midway,above]{{}};".format(
-                x1, x2, y1, lineWidth, arrowHead, BoxValuesFontSize
+                x1 , x2, y1, lineWidth, arrowHead, BoxValuesFontSize
             )
         )
 
