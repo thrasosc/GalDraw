@@ -36,7 +36,7 @@ python3 lfsr_draw.py
 Customize tap positions and initial values:
 
 ```bash
-python3 lfsr_draw.py --taps 1001 --init-values 1111
+python3 lfsr_draw.py --taps 110101 --init-values 100001
 ```
 
 Generate multiple output formats:
@@ -49,28 +49,36 @@ python3 lfsr_draw.py --format all
 
 - `--taps`: Tap sequence as a string of 0s and 1s (rightmost is x_0, default: 1001)
 - `--init-values`: Initial values as a string of 0s and 1s (default: 1111)
-- `--show-values`: Show values in the LFSR boxes (default: True)
-- `--show-names`: Show box names under the LFSR boxes (default: True)
+- `--hide-values`: Hide values in the LFSR boxes
+- `--hide-names`: Hide box names under the LFSR boxes
 - `--format`: Output format: pdf (default), png, eps, or all
 
 ## Example Outputs
 
-### 4-bit Galois LFSR with taps [1,0,0,1]
+### 4-bit Galois LFSR
 
 ```bash
-python3 lfsr_draw.py --taps 1001 --init-values 1111
+python3 lfsr_draw.py --taps 1001 --init-values 1101
 ```
 
 ![4-bit Galois LFSR](examples/4bit_lfsr.png)
 
-### 8-bit Galois LFSR with taps [1,0,1,1,1,0,0,1]
+### 8-bit Galois LFSR
 
 ```bash
-python3 lfsr_draw.py --taps 10111001 --init-values 11111111
+python3 lfsr_draw.py --taps 10111001 --init-values 11001011
 ```
 
 ![8-bit Galois LFSR](examples/8bit_lfsr.png)
 
+### 8-bit Galois LFSR with hidden values and names
+
+```bash
+python3 lfsr_draw.py --taps 10111001 --init-values 11001011 --hide-values --hide-names
+```
+
+![8-bit Galois LFSR](examples/8bit_lfsr_hidden_values_and_names.png)
+
 ## Credits
 
-This project is a modified version of the [LFSR-Automatic-Draw](https://github.com/kelalaka153/LFSR-Automatic-Draw) tool, specifically adapted to focus on Galois LFSR visualization.
+This project is a modified version of the [LFSR-Automatic-Draw](https://github.com/kelalaka153/LFSR-Automatic-Draw) tool, adapted to focus on Galois LFSRs.
