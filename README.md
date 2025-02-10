@@ -27,7 +27,7 @@ This tool generates clear, professional-looking diagrams of Galois LFSRs, which 
 
 ## Usage
 
-Basic usage with default values (4-bit LFSR with taps [1,0,0,1] and initial values [1,1,1,1]):
+Basic usage with default values (4-bit LFSR with taps `1001` and initial values `1111`):
 
 ```bash
 python3 galdraw.py
@@ -47,11 +47,12 @@ python3 galdraw.py --format all
 
 ### Command Line Options
 
-- `--taps`: Tap sequence as a string of 0s and 1s (rightmost is x_0, default: 1001)
-- `--init-values`: Initial values as a string of 0s and 1s (default: 1111)
+- `--taps`: Tap sequence as a string of 0s and 1s (rightmost is x_0, default: `1001`)
+- `--init-values`: Initial values as a string of 0s and 1s (default: `1111`)
 - `--hide-values`: Hide values in the LFSR boxes
 - `--hide-names`: Hide box names under the LFSR boxes
-- `--format`: Output format: pdf (default), png, eps, or all
+- `--format`: Output format: `pdf` (default), `png`, `eps`, or `all`
+- `--output-dir`: Directory to save output files (default: current directory)
 
 ## Example Outputs
 
