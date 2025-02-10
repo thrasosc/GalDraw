@@ -158,7 +158,7 @@ def printGaloisRegister(x1, y1, value, index):
 
 
 # Draws a line from a register to the XOR gate for Galois LFSR tap points
-def printGaloisTapLine(x1, y1, length, arrow=False):
+def printGaloisTapLine(x1, y1, length, is_last_cell=False):
     # Draw line up to feedback line position
     feedback_y = y1 + length + xorSize  # Use the provided length parameter directly
     print(
@@ -166,27 +166,42 @@ def printGaloisTapLine(x1, y1, length, arrow=False):
             lineWidth, x1 + boxSize / 2, y1, feedback_y
         )
     )
-
+    
     # Make the half circle smaller
     radius = boxSize / 6
-
-    # Add half circle connecting to the square, flipped on x-axis
-    print(
-        "\t\\draw [line width={0}cm] ({1},{2}) arc(180:0:{3});".format(
-            lineWidth, x1 + boxSize / 2 - radius, y1, radius
+    
+    if is_last_cell:
+        # For the last cell, draw the top half circle and bottom right quadrant
+        # Draw the top half circle
+        print(
+            "\t\\draw [line width={0}cm] ({1},{2}) arc(180:0:{3});".format(
+                lineWidth, x1 + boxSize / 2 - radius, y1, radius
+            )
         )
-    )
-
+        # Draw the bottom right quadrant
+        print(
+            "\t\\draw [line width={0}cm] ({1},{2}) arc(0:-90:{3});".format(
+                lineWidth, x1 + boxSize / 2 + radius, y1, radius
+            )
+        )
+    else:
+        # For other cells, draw just the top half circle
+        print(
+            "\t\\draw [line width={0}cm] ({1},{2}) arc(180:0:{3});".format(
+                lineWidth, x1 + boxSize / 2 - radius, y1, radius
+            )
+        )
+    
     # Draw the line at the bottom of the half circle
     print(
         "\t\\draw [line width={0}cm] ({1},{2}) -- ({3},{2});".format(
             lineWidth, x1 + boxSize / 2 - radius, y1, x1 + boxSize / 2 + radius
         )
     )
-
+    
     # Position arrow to point exactly to the half circle
     arrow_start_y = y1 + radius * 3  # Start position
-    arrow_end_y = y1 + radius  # End position at exact top of half circle
+    arrow_end_y = y1 + radius        # End position at exact top of half circle
     print(
         "\t\\draw [arrows={{-Triangle[angle=90:{0}cm,black,fill=black,line width={1}cm]}}]({2},{3}) -- ({2},{4});".format(
             arrowHead, lineWidth, x1 + boxSize / 2, arrow_start_y, arrow_end_y
@@ -271,8 +286,12 @@ def drawGaloisLFSR(taps, values, hideValues, hideBoxNames):
         printGaloisRegister(x + i * boxSize, y, values[i], i)
 
         if val == 1:
-            # Draw tap lines with standard height
-            printGaloisTapLine(x + i * boxSize, y + boxSize / 2, xorDistance)
+            if i == len(taps) - 1:
+                # For the last cell
+                printGaloisTapLine(x + i * boxSize, y + boxSize / 2, xorDistance, is_last_cell=True)
+            else:
+                # For all other cells
+                printGaloisTapLine(x + i * boxSize, y + boxSize / 2, xorDistance, is_last_cell=False)
 
             # For the last box, add the output feedback line going to the top feedback line
             if i == len(taps) - 1:
