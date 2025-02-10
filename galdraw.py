@@ -292,9 +292,20 @@ def drawGaloisLFSR(taps, values, hideValues, hideBoxNames):
             count = count - 1
             lastTapPos = i
 
-    feedbackValue = calculateGaloisFeedback(taps, values)
+    # Always draw feedback line from output line
+    feedback_y = y + boxSize / 2 + xorDistance + xorSize
+    print(
+        "\\draw [line width={0}cm] ({1},{2}) -- ({1},{3}) -- ({4},{3});".format(
+            lineWidth,
+            x + (len(taps) - 1) * boxSize + boxSize,  # Start just right of the last box
+            y,  # Start at output line height
+            feedback_y,  # Go up to feedback line height
+            x - leftFeedbackDistance,  # Go left to meet feedback line
+        )
+    )
+    feedbackValue = values[-1]
     printGaloisFeedbackPath(
-        x + (lastTapPos) * boxSize,  # x1
+        x + (len(taps) - 1) * boxSize,  # x1
         x - leftFeedbackDistance,  # x2
         x - boxSize / 2,  # x3
         y + boxSize / 2 + xorDistance + xorSize,  # y1
