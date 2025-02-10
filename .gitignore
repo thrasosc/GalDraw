@@ -1,0 +1,43 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+
+# LaTeX build files
+*.aux
+*.log
+*.lof
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.dvi
+*.idx
+*.ilg
+*.ind
+*.ins
+*.lpr
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.synctex*
+*.run.xml
+
+# TikZ/Generated files
+*.pdf
+*.png
+*.eps
+
+# OS-specific
+.DS_Store
+Thumbs.db
