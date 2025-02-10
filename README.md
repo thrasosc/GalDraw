@@ -30,19 +30,19 @@ This tool generates clear, professional-looking diagrams of Galois LFSRs, which 
 Basic usage with default values (4-bit LFSR with taps [1,0,0,1] and initial values [1,1,1,1]):
 
 ```bash
-python3 lfsr_draw.py
+python3 galdraw.py
 ```
 
 Customize tap positions and initial values:
 
 ```bash
-python3 lfsr_draw.py --taps 110101 --init-values 100001
+python3 galdraw.py --taps 110101 --init-values 100001
 ```
 
 Generate multiple output formats:
 
 ```bash
-python3 lfsr_draw.py --format all
+python3 galdraw.py --format all
 ```
 
 ### Command Line Options
@@ -58,7 +58,7 @@ python3 lfsr_draw.py --format all
 ### 4-bit Galois LFSR
 
 ```bash
-python3 lfsr_draw.py --taps 1001 --init-values 1101
+python3 galdraw.py --taps 1001 --init-values 1101
 ```
 
 ![4-bit Galois LFSR](examples/4bit_lfsr.png)
@@ -66,7 +66,7 @@ python3 lfsr_draw.py --taps 1001 --init-values 1101
 ### 8-bit Galois LFSR
 
 ```bash
-python3 lfsr_draw.py --taps 10111001 --init-values 11001011
+python3 galdraw.py --taps 10111001 --init-values 11001011
 ```
 
 ![8-bit Galois LFSR](examples/8bit_lfsr.png)
@@ -74,7 +74,7 @@ python3 lfsr_draw.py --taps 10111001 --init-values 11001011
 ### 8-bit Galois LFSR with hidden values and names
 
 ```bash
-python3 lfsr_draw.py --taps 10111001 --init-values 11001011 --hide-values --hide-names
+python3 galdraw.py --taps 10111001 --init-values 11001011 --hide-values --hide-names
 ```
 
 ![8-bit Galois LFSR](examples/8bit_lfsr_hidden_values_and_names.png)
