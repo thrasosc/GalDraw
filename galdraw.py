@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Drawing parameters for the Galois LFSR visualization
 # Note: All parameters are independent to provide flexibility in customization
 # For example: you can adjust line thickness or box sizes independently
