@@ -322,10 +322,13 @@ def parse_binary_list(s):
         raise argparse.ArgumentTypeError("Input must be a string of 0s and 1s")
 
 
-def compile_and_convert(output_format="pdf"):
+def compile_and_convert(output_format="pdf", output_dir="."):
     """Compile LaTeX and convert to specified format."""
     import subprocess
     from pathlib import Path
+
+    # Ensure the output directory exists
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     outputs = []
 
@@ -355,6 +358,10 @@ def compile_and_convert(output_format="pdf"):
             )
             outputs.append("lfsr.png")
 
+        # Move generated files to the output directory
+        for output in outputs:
+            Path(output).rename(Path(output_dir) / output)
+
         # Clean up temporary files
         for f in Path(".").glob("lfsr.*"):
             if f.suffix in [".aux", ".log", ".tex"]:
@@ -362,7 +369,7 @@ def compile_and_convert(output_format="pdf"):
         if Path("texput.log").exists():
             Path("texput.log").unlink()
 
-        print("Galois LFSR diagram generated successfully:")
+        print(f"Galois LFSR diagram generated successfully in '{output_dir}':")
         for output in outputs:
             print(f"- {output}")
 
@@ -428,12 +435,17 @@ more efficient in hardware compared to Fibonacci LFSRs.""",
         help="Hide box names under the LFSR boxes (default: False)",
         default=False,
     )
-
     parser.add_argument(
         "--format",
         choices=["pdf", "png", "eps", "all"],
         help="Output format: pdf (default), png, eps, or all",
         default="pdf",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        help="Directory to save output files (default: current directory)",
+        default=".",
     )
 
     # Parse arguments, suppressing the default error output
