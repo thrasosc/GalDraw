@@ -244,7 +244,7 @@ def calculateGaloisFeedback(taps, values):
 
 
 # Main function to print the complete LFSR diagram
-def drawGaloisLFSR(taps, values, printvalues, showBoxNames):
+def drawGaloisLFSR(taps, values, hideValues, hideBoxNames):
     global drawInitValues, printBoxNames
     global boxSize, xorDistance, BoxValuesFontSize, BoxIndexFontSize, leftFeedbackDistance
 
@@ -256,8 +256,8 @@ def drawGaloisLFSR(taps, values, printvalues, showBoxNames):
 
     leftFeedbackDistance = 2 * boxSize
 
-    drawInitValues = printvalues
-    printBoxNames = showBoxNames
+    drawInitValues = not hideValues
+    printBoxNames = not hideBoxNames
 
     lastTapPos = 0
     printPreample()
@@ -416,16 +416,16 @@ more efficient in hardware compared to Fibonacci LFSRs.""",
         default="1111",
     )
     parser.add_argument(
-        "--show-values",
+        "--hide-values",
         action="store_true",
-        help="Show values in the LFSR boxes (default: True)",
-        default=True,
+        help="Hide values in the LFSR boxes (default: False)",
+        default=False,
     )
     parser.add_argument(
-        "--show-names",
+        "--hide-names",
         action="store_true",
-        help="Show box names under the LFSR boxes (default: True)",
-        default=True,
+        help="Hide box names under the LFSR boxes (default: False)",
+        default=False,
     )
 
     parser.add_argument(
@@ -461,7 +461,7 @@ more efficient in hardware compared to Fibonacci LFSRs.""",
         sys.stdout = f
 
         # Generate LaTeX for Galois LFSR
-        drawGaloisLFSR(args.taps, args.init_values, args.show_values, args.show_names)
+        drawGaloisLFSR(args.taps, args.init_values, args.hide_values, args.hide_names)
 
         # Restore stdout
         sys.stdout = original_stdout
