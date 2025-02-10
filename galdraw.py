@@ -194,7 +194,7 @@ def printGaloisTapLine(x1, y1, length, arrow=False):
     )
 
 
-def printGaloisFeedbackPath(x1, x2, x3, y1, y2, boxsizehalf):
+def printGaloisFeedbackPath(x1, x2, x3, y1, y2, feedback, boxsizehalf):
     if drawInitValues:
         print(
             "\\draw[->,line width=0.1cm,arrows={{-Triangle[angle=90:{6}cm,black,fill=black,line width={5}cm]}}] ({0},{3}) -- ({1},{3}) -- ({1},{4}) -- ({2},{4});".format(
