@@ -47,12 +47,14 @@ python3 galdraw.py --format all
 
 ### Command Line Options
 
-- `--taps`: Tap sequence as a string of 0s and 1s (rightmost is x_0, default: `1001`)
-- `--init-values`: Initial values as a string of 0s and 1s (default: `1111`)
-- `--hide-values`: Hide values in the LFSR boxes
-- `--hide-names`: Hide box names under the LFSR boxes
-- `--format`: Output format: `pdf` (default), `png`, `eps`, or `all`
-- `--output-dir`: Directory to save output files (default: current directory)
+| Option          | Description                                                 |
+| --------------- | ----------------------------------------------------------- |
+| `--taps`        | Tap sequence as a binary string (default: `1001`)           |
+| `--init-values` | Initial values as a binary string (default: `1111`)         |
+| `--hide-values` | Hide values inside the LFSR boxes                           |
+| `--hide-names`  | Hide box names under the LFSR boxes                         |
+| `--format`      | Output format: `pdf` (default), `png`, `eps`, or `all`      |
+| `--output-dir`  | Directory to save output files (default: current directory) |
 
 ## Example Outputs
 
