@@ -29,7 +29,7 @@ def get_box_size(length):
 boxColor = "{{rgb:black,0;white,5}}"
 
 # used for the distance of the box variable names
-boxBelowTextDistance = 6
+boxBelowTextDistance = 6  # Default, will be adjusted dynamically
 
 # size of the x-or drawing cm
 xorSize = 1
@@ -63,7 +63,7 @@ leftFeedbackDistance = 8
 def printPreample():
 
     print(
-        "\\documentclass[magick={density=300,size=1080x800,outext=.png},tikz]{standalone}"
+        "\\documentclass[magick={density=300,outext=.png},tikz]{standalone}"  # Removed fixed size
     )
 
     print("\\usepackage{xcolor}")
@@ -265,13 +265,14 @@ def calculateGaloisFeedback(taps, values):
 # Main function to print the complete LFSR diagram
 def drawGaloisLFSR(taps, values, hideValues, hideBoxNames):
     global drawInitValues, printBoxNames
-    global boxSize, xorDistance, BoxValuesFontSize, BoxIndexFontSize, leftFeedbackDistance
+    global boxSize, xorDistance, BoxValuesFontSize, BoxIndexFontSize, leftFeedbackDistance, boxBelowTextDistance  # Added boxBelowTextDistance
 
     # Update drawing parameters based on LFSR length
     boxSize = get_box_size(len(taps))
     xorDistance = boxSize / 2
     BoxValuesFontSize = get_font_size(boxSize)
     BoxIndexFontSize = get_font_size(boxSize)
+    boxBelowTextDistance = 1.5 * boxSize  # Adjusted dynamically based on box size
 
     leftFeedbackDistance = 2 * boxSize
 
